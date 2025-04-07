@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator } from 'reac
 import React, { useEffect, useState } from 'react'
 import { images } from '@/constants/images'
 import MovieCard from '@/components/MovieCard'
-import { useRouter } from "expo-router";
 import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
 import { icons } from '@/constants/icons';

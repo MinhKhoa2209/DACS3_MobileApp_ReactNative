@@ -2,25 +2,30 @@
   "expo": {
     "name": "movie_app",
     "slug": "movie_app",
+    "owner": "anhcukhoa",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/logo.png"
+      },
+      "package": "com.anhcukhoa.movieapp",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "myapp",
+             "host": "*"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "plugins": [
       "expo-router",
@@ -34,8 +39,12 @@
         }
       ]
     ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    "extra": {
+      "eas": {
+        "projectId": "67de8a23000d1768b9cd",
+        "googleClientId": "325694443627-9o06r9uf3tet3e576keo3arhbk7t09ql.apps.googleusercontent.com"
+      }
+    },
+    "newArchEnabled": true
   }
 }

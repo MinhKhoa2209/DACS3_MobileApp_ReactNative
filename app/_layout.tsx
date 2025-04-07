@@ -1,15 +1,51 @@
-import { Stack } from "expo-router";
+import React, { useEffect } from 'react';
+import { View, ActivityIndicator, Text, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Stack, useRouter } from 'expo-router';
+import { useGlobalContext } from '@/app/(auth)/AuthContext';
+import GlobalProvider from '@/app/(auth)/AuthContext';
 import "./globals.css";
-import { StatusBar } from "react-native";
 
-export default function RootLayout() {
+const RootLayoutInner = () => {
+  const { loading, isLogged } = useGlobalContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading) {
+      if (isLogged) {
+        router.replace('/(tabs)');
+      } else {
+        router.replace('/(auth)/LoginScreen');
+      }
+    }
+  }, [loading, isLogged, router]);
+
+  if (loading) {
+    return (
+      <SafeAreaView className="flex-1 bg-primary">
+        <View className="flex-1 justify-center items-center">
+          <ActivityIndicator size="large" color="#AB8BFF" />
+          <Text className="mt-4 text-dark-100">Checking your session...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
-    <>
-     <StatusBar hidden={true} />
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false,}} />
-        <Stack.Screen name="movies/[id]" options={{ headerShown: false,  }}  />
-      </Stack>
-</>
+    <SafeAreaView className="bg-primary flex-1">
+      <Stack screenOptions={{ headerShown: false }}></Stack>
+    </SafeAreaView>
   );
-}
+};
+
+const RootLayout = () => {
+  return (
+    <GlobalProvider>
+      <StatusBar hidden={true} />
+      <RootLayoutInner />
+    </GlobalProvider>
+  );
+};
+
+
+export default RootLayout;

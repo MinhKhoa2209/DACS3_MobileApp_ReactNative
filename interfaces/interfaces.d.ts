@@ -75,3 +75,22 @@ interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
 }
+
+
+interface GlobalContextType {
+  isLogged: boolean;
+  user: User | null;
+  loading: boolean;
+  refetch: () => void;
+
+}
+
+interface User {
+  $id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  avatar?: string;
+  createdAt?: string; 
+  role?: string;     
+}

@@ -1,14 +1,23 @@
-import { Client, Databases, ID, Query } from 'react-native-appwrite';
+import { Client, Databases, ID, Query , Account, Avatars, Storage} from 'react-native-appwrite';
+import mime from 'mime';
+import * as FileSystem from 'expo-file-system';
 
-// track the searches made by the user
+
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
 const COLLECTION_ID = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID!;
-const client = new Client().
+const BUCKET_ID = process.env.EXPO_PUBLIC_GOOGLE_BUCKET_ID!;
+export const client = new Client().
     setEndpoint("https://cloud.appwrite.io/v1").
-    setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!);
+    setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!).
+    setPlatform('com.dmk.movieapp');
+ 
+export const account = new Account(client);
+export const database = new Databases(client);
+export const avatar = new Avatars(client);
 
-const database = new Databases(client);
+export const storage = new Storage(client);
 
+// export const storage = new Storage(client);
 
 export const updateSearchCount = async (query: string, movie: Movie) => {
     try {
@@ -50,3 +59,29 @@ export const getTrendingMovies = async () : Promise<TrendingMovie[] | undefined 
         return undefined;
     }
 }
+
+export const uploadAvatar = async (uri: string): Promise<string> => {
+    try {
+      const fileName = uri.split('/').pop() ?? `avatar-${Date.now()}.jpg`;
+      const mimeType = mime.getType(uri) || 'image/jpeg';
+      const fileInfo = await FileSystem.getInfoAsync(uri);
+      if (!fileInfo.exists) throw new Error('File does not exist at URI');
+  
+      const file = {
+        uri,
+        name: fileName,
+        type: mimeType,
+        size: fileInfo.size,
+      };
+  
+      const result = await storage.createFile(BUCKET_ID, ID.unique(), file);
+      const fileUrl = storage.getFileView(BUCKET_ID, result.$id).href;
+      await account.updatePrefs({ avatar: fileUrl });
+  
+      return fileUrl;
+    } catch (err) {
+      console.error('❌ uploadAvatar failed:', err);
+      throw err;
+    }
+  };
+  

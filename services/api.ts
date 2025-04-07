@@ -45,3 +45,27 @@ export const fetchMovieDetails = async (movieId: string) : Promise<MovieDetails>
         throw error;
     }
 }
+
+export const fetchMovieVideos = async (movieId: string) => {
+    try {
+        const url = `${TMDB_CONFIG.BASE_URL}/movie/${movieId}/videos?api_key=${TMDB_CONFIG.API_KEY}`;
+        console.log("Fetching movie videos from:", url);
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: TMDB_CONFIG.headers // 🔹 Thêm headers vào request
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch movie videos: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Movie videos response:", data);
+
+        return data.results || [];
+    } catch (error) {
+        console.error("Error fetching movie videos:", error);
+        return [];
+    }
+};

@@ -1,9 +1,7 @@
 import { Tabs } from "expo-router";
-import { ImageBackground, Image, Text, View } from "react-native";
-
+import { ImageBackground, Image, Text, View, StatusBar } from "react-native";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-
 const TabIcon = ({ focused, icon, title }: any) => {
   if (focused) {
     return (

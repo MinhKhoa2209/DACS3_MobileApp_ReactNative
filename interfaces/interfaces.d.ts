@@ -82,6 +82,7 @@ interface GlobalContextType {
   user: User | null;
   loading: boolean;
   refetch: () => void;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 
 }
 

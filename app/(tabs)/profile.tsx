@@ -9,11 +9,12 @@ import { format } from 'date-fns';
 
 
 const Profile = () => {
-  const { user, refetch } = useGlobalContext();
+  const { user, setUser, refetch } = useGlobalContext();
   const [isLoading, setIsLoading] = useState(false);
   const [avatar, setAvatar] = useState(user?.avatar);
   const [newPhone, setNewPhone] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
 
 
   useEffect(() => {
@@ -71,17 +72,22 @@ const Profile = () => {
       Alert.alert('Invalid Phone', 'Phone number must start with +84.');
       return;
     }
+    if (newPhone && !currentPassword) {
+      Alert.alert('Please enter your current password to update phone number.');
+      return;
+    }
     setIsLoading(true);
     try {
       if (newPhone) {
-        if (!user?.$id) throw new Error('Missing user ID');
-        await account.updatePhone(newPhone,newPassword); 
-      }
+        await account.updatePhone(newPhone, currentPassword); 
+      } 
       if (newPassword) {
         await account.updatePassword(newPassword); 
       }
   
       Alert.alert('Success', 'Information updated successfully!');
+      const updatedUser = await account.get(); 
+      setUser(updatedUser);
     } catch (error) {
       console.error(error);
       Alert.alert('Error', 'Failed to update information.');
@@ -136,15 +142,35 @@ const Profile = () => {
   <Text className="text-xl text-white font-rubik-bold mb-4 text-left">Change User Information</Text>
 
       <View className="bg-dark-100 rounded-2xl p-6">
+      <TextInput
+        placeholder="New Phone Number"
+        value={newPhone}
+        onChangeText={(text) => {
+          if (text === '') {
+            setNewPhone('');
+            return;
+          }
+          const cleaned = text.replace(/[^0-9]/g, '');
+          if (cleaned.startsWith('84')) {
+            setNewPhone('+' + cleaned);
+          } else {
+            const formatted = cleaned.replace(/^0+/, ''); 
+            setNewPhone('+84' + formatted);
+          }
+        }}
+        keyboardType="phone-pad"
+        className="bg-white rounded-xl p-3 mb-4 h-12"
+        maxLength={15} 
+      />
 
         <TextInput
-          placeholder="New Phone Number"
-          value={newPhone}
-          onChangeText={setNewPhone}
-          keyboardType="phone-pad" 
+          placeholder="Current Password"
+          secureTextEntry
+          value={currentPassword}
+          onChangeText={setCurrentPassword}
           className="bg-white rounded-xl p-3 mb-4 h-12"
         />
-
+      
           <TextInput
             placeholder="New Password"
             secureTextEntry

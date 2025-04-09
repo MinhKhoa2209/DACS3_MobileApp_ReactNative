@@ -102,7 +102,7 @@ const LoginScreen = () => {
           <ActivityIndicator color="#0000ff" />
         ) : (
           <>
-            <Image source={icons.google_icon} className="w-6 h-6 mr-2" />
+            <Image source={icons.google} className="w-6 h-6 mr-2 " />
             <Text className="text-white text-center">Login with Google</Text>
           </>
         )}

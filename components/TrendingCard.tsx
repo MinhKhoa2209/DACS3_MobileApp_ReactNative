@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'expo-router'
 import { images } from '@/constants/images'
 import MaskedView from "@react-native-masked-view/masked-view";
-import { icons } from '@/constants/icons';
+import { TrendingCardProps } from '@/interfaces/interfaces';
 
 
 const TrendingCard = ({movie : {movie_id,title, poster_url}, index}: TrendingCardProps) => {

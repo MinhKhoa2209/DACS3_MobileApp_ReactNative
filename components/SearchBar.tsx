@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native'
+import { View, Image, TextInput } from 'react-native'
 import React from 'react'
 import { icons } from '@/constants/icons'
 

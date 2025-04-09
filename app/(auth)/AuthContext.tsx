@@ -1,5 +1,6 @@
 import React, { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { getCurrentUser } from "@/services/auth";
+import { GlobalContextType, User } from "@/interfaces/interfaces";
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 

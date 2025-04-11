@@ -32,9 +32,7 @@ const RootLayoutInner = () => {
   }
 
   return (
-    <SafeAreaView className="bg-primary flex-1">
       <Stack screenOptions={{ headerShown: false }}></Stack>
-    </SafeAreaView>
   );
 };
 

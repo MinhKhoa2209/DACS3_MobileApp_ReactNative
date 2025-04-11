@@ -46,7 +46,7 @@ const LoginScreen = () => {
 
   return (
     <View className="flex-1 justify-center px-6 bg-primary">
-      <Text className="text-center text-3xl font-bold text-white mb-6">MOVIE APP</Text>
+      <Text className="text-center text-3xl font-bold text-white mb-6">POPFLIX</Text>
 
 
       <Text className="text-gray-400">Email</Text>

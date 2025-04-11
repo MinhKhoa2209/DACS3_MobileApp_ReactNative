@@ -13,8 +13,6 @@ export interface Movie {
   quality: string;
   lang: string;
   status: string;
-  modified: string;
-  created: string;
   is_copyright: boolean;
   trailer_url?: string;
 }
@@ -32,6 +30,11 @@ export interface TrendingMovie {
 interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
+}
+
+interface Episode {
+  name: string;
+  link_embed: string;
 }
 
 
@@ -52,4 +55,28 @@ interface User {
   avatar?: string;
   createdAt?: string; 
   role?: string;     
+}
+
+interface MovieInfoProps {
+  label: string;
+  value?: string | number | null;
+}
+ interface FavoriteMovie {
+  $id: string; 
+  user_id: string; 
+  name: string;
+  slug: string;
+  origin_name: string;
+  poster_url: string;
+  year: number;
+  category: { name: string }[];
+  country: { name: string }[];
+  time: string;
+  episode_current: string;
+  episode_total: string;
+  quality: string;
+  lang: string;
+  status: string;
+  is_copyright: boolean;
+  trailer_url?: string;
 }

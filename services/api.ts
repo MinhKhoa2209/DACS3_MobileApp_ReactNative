@@ -30,18 +30,6 @@ export const fetchMovieVideos = async (slug: string) => {
   return data?.episodes?.[0]?.server_data || [];
 };
 
-/**
- * Fetch trailer nếu có trong danh sách tập
- */
-export const fetchMovieTrailer = async (slug: string) => {
-  const response = await fetch(`${KKPHIM_BASE_URL}/phim/${slug}`);
-  if (!response.ok) throw new Error('Failed to fetch movie trailer');
-  const data = await response.json();
-  const trailer = data?.episodes?.[0]?.server_data?.find((ep: any) =>
-    ep.name.toLowerCase().includes('trailer')
-  );
-  return trailer || null;
-};
 
 /**
  * Tìm kiếm phim nâng cao với nhiều tham số

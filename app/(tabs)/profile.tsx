@@ -6,6 +6,7 @@ import { icons } from '@/constants/icons';
 import { logout } from '@/services/auth';
 import { account, uploadAvatar } from '@/services/appwrite';
 import { format } from 'date-fns';
+import { images } from '@/constants/images';
 
 
 const Profile = () => {
@@ -99,11 +100,11 @@ const Profile = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-primary">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-32 px-6">
-        <Text className="text-3xl font-rubik-bold text-white mt-2 mb-8 text-center">Profile</Text>
-
+        <Image source={images.bg}  className="flex-1 absolute w-full z-0"   resizeMode="cover"     />          
+        <ScrollView  className="flex-1 px-5" showsVerticalScrollIndicator={false} contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }} >       
+        <Image source={icons.logo} className="w-16 h-16 mt-16 mb-5 mx-auto"/>
         <View className="items-center">
-          <View className="relative">
+          <View className="relative mt-10">
             <Image
               source={{ uri: avatar }}
               className="w-44 h-44 rounded-full border-4 border-accent shadow-lg"
@@ -189,7 +190,7 @@ const Profile = () => {
         <View className="mt-16">
           <TouchableOpacity
             onPress={handleLogout}
-            className="bg-accent rounded-xl py-5 flex-row justify-center items-center shadow-md"
+            className="bg-red-600 rounded-xl py-4 flex-row justify-center items-center shadow-md mb-28"
           >
             <Text className="text-white font-bold text-lg">Logout</Text>
             <Image source={icons.logout} className="w-6 h-6 ml-3" />

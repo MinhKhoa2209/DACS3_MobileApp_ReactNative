@@ -1,3 +1,4 @@
+
 import google from '@/assets/icons/google.png';
 import home from "@/assets/icons/home.png";
 import search from "@/assets/icons/search.png";
@@ -10,6 +11,7 @@ import arrow from "@/assets/icons/arrow.png";
 import bell from "@/assets/icons/bell.png";
 import edit from "@/assets/icons/edit.png";
 import sun from "@/assets/icons/sun.png";
+import unsave from "@/assets/icons/unsave.png";
 import logout from "@/assets/icons/logout.png";
 
 export const icons = {
@@ -25,5 +27,6 @@ export const icons = {
   bell,
   edit,
   sun,
-  logout
+  logout,
+  unsave
 };

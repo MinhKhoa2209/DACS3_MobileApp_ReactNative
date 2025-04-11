@@ -45,38 +45,47 @@ const LoginScreen = () => {
   
 
   return (
-    <View className="flex-1 justify-center px-6 bg-primary">
-      <Text className="text-center text-3xl font-bold text-white mb-6">POPFLIX</Text>
-
-
-      <Text className="text-gray-400">Email</Text>
-      <TextInput 
-        className="border border-gray-600 p-3 rounded mb-4 text-white bg-[#1E1E1E]"
-        placeholder="name@example.com"
-        placeholderTextColor="gray"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
+    <View className="flex-1 justify-center px-6 bg-black">
+     <View className="flex-row items-center justify-center mt-16 mb-10 gap-x-2">
+      <Image
+        source={icons.logo}
+        className="w-14 h-14"
+        resizeMode="contain"
       />
+       <Text className="text-5xl font-bold text-white leading-[65px]">POPFLIX</Text>
+    </View>
+    <Text className="text-white">Email</Text>
+    <TextInput 
+      className="border border-gray-600 p-3 rounded mb-4 text-white bg-white/10 h-14"
+      placeholder="name@example.com"
+      placeholderTextColor="gray"
+      value={email}
+      onChangeText={setEmail}
+      keyboardType="email-address"
+      autoCapitalize="none"
+    />
 
-      <Text className="text-gray-400">Password</Text>
-      <View className="flex-row items-center border border-gray-600 p-3 rounded mb-4 bg-[#1E1E1E]">
-        <TextInput
-          className="flex-1 text-base text-white"
-          placeholder="Enter your password"
-          placeholderTextColor="gray"
-          secureTextEntry={!isPasswordVisible}
-          value={password}
-          onChangeText={setPassword}
+    <Text className="text-white">Password</Text>
+    <View className="flex-row items-center border border-gray-600 px-3 rounded mb-4 bg-white/10 h-14">
+      <TextInput
+        className="flex-1 text-base text-white"
+        placeholder="Enter your password"
+        placeholderTextColor="gray"
+        secureTextEntry={!isPasswordVisible}
+        value={password}
+        onChangeText={setPassword}
+      />
+      <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
+        <Entypo
+          name={isPasswordVisible ? "eye" : "eye-with-line"}
+          size={22}
+          color="gray"
         />
-        <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
-          <Entypo name={isPasswordVisible ? "eye" : "eye-with-line"} size={24} color="gray" />
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
+    </View>
 
       <TouchableOpacity 
-        className="bg-blue-500 p-4 rounded w-full mb-4"
+        className="bg-blue-500 p-4 mt-5 rounded w-full mb-4"
         onPress={handleLogin}
         disabled={loading}
       >
@@ -94,7 +103,7 @@ const LoginScreen = () => {
       </View>
 
       <TouchableOpacity 
-        className="border border-gray-600 p-4 rounded flex-row items-center justify-center mb-4 bg-[#1E1E1E]"
+        className="border border-gray-600 p-4 rounded flex-row items-center justify-center mb-4 bg-white/10"
         onPress={handleGoogleLogin}
         disabled={loading}
       >

@@ -31,12 +31,12 @@ const SignUpScreen = () => {
   
 
   return (
-    <View className="flex-1 justify-center px-6 bg-primary">
+    <View className="flex-1 justify-center px-6 bg-black">
       <Text className="text-center text-3xl font-bold text-white mb-6">Sign Up</Text>
 
-      <Text className="text-gray-400">Email</Text>
-      <TextInput
-        className="border border-gray-600 p-3 rounded mb-4 text-white bg-[#1E1E1E]"
+      <Text className="text-white">Email</Text>
+      <TextInput 
+        className="border border-gray-600 p-3 rounded mb-4 text-white bg-white/10 h-14"
         placeholder="name@example.com"
         placeholderTextColor="gray"
         value={email}
@@ -44,11 +44,10 @@ const SignUpScreen = () => {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-
-      <Text className="text-gray-400">Password</Text>
-      <View className="border border-gray-600 p-3 rounded mb-4 flex-row items-center bg-[#1E1E1E]">
+      <Text className="text-white">Password</Text>
+       <View className="flex-row items-center border border-gray-600 px-3 rounded mb-4 bg-white/10 h-14">
         <TextInput
-          className="flex-1 text-white"
+          className="flex-1 text-base text-white"
           placeholder="Enter your password"
           placeholderTextColor="gray"
           secureTextEntry={!isPasswordVisible}
@@ -56,12 +55,12 @@ const SignUpScreen = () => {
           onChangeText={setPassword}
         />
           <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
-            <Entypo name={isPasswordVisible ? "eye" : "eye-with-line"} size={24} color="gray" />
+            <Entypo name={isPasswordVisible ? "eye" : "eye-with-line"} size={22} color="gray" />
             </TouchableOpacity>
       </View>
 
       <TouchableOpacity
-        className="bg-blue-500 p-4 rounded w-full mb-4"
+        className="bg-blue-500 p-4 rounded w-full mt-5 mb-4"
         onPress={handleSignUp}
         disabled={loading}
       >

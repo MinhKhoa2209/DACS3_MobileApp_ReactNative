@@ -107,18 +107,13 @@ export const saveToFavorites = async (movie: Movie) => {
       if (existing.total > 0) {
         console.log("Movie is already in favorites");
         return;
-      }
-  
-      const posterUrl = movie.poster_url.startsWith("http")
-        ? movie.poster_url
-        : `https://phimimg.com/${movie.poster_url}`;
-  
+      }  
       await database.createDocument(DATABASE_ID, FAVORITES_ID, ID.unique(), {
         user_id: userId,
         name: movie.name,
         slug: movie.slug,
         origin_name: movie.origin_name,
-        poster_url: posterUrl,
+        poster_url: movie.poster_url,
         year: movie.year,
         category: categoryStr,
         country: countryStr,
